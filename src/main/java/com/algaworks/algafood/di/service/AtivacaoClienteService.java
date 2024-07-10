@@ -6,15 +6,18 @@ import com.algaworks.algafood.di.notificacao.Notificador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class AtivacaoClienteService {
 
-    @Autowired(required = false)
-    private Notificador notificador;
+    @Autowired
+    private List<Notificador> notificadores;
 
     public void ativar(Cliente cliente) {
         cliente.ativar();
-
-        notificador.notificar(cliente, "Seu cadsatro no sistema está ativo");
+        for(Notificador notificador : notificadores) {
+            notificador.notificar(cliente, "Seu cadastro no sistema está ativo");
+        }
     }
 }
