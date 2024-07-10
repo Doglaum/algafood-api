@@ -9,21 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class AtivacaoClienteService {
 
-    //Inejetar 1
-    @Autowired
+    @Autowired(required = false)
     private Notificador notificador;
-
-    //Injetar 2
-    @Autowired
-    public AtivacaoClienteService (Notificador notificador) {
-        this.notificador = notificador;
-    }
-
-    //Injetar 3
-    @Autowired
-    public void setNotificador(Notificador notificador) {
-        this.notificador = notificador;
-    }
 
     public void ativar(Cliente cliente) {
         cliente.ativar();
