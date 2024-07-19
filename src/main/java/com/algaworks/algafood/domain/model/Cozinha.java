@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Cozinha {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
 
@@ -27,6 +27,14 @@ public class Cozinha {
     }
 
     public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Cozinha() {
+
+    }
+
+    public Cozinha(String nome) {
         this.nome = nome;
     }
 
