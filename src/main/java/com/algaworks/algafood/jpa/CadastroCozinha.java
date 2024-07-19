@@ -1,7 +1,6 @@
 package com.algaworks.algafood.jpa;
 
 import com.algaworks.algafood.domain.model.Cozinha;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +21,7 @@ public class CadastroCozinha {
     }
 
     @Transactional
-    public Cozinha adicionar(Cozinha cozinha) {
+    public Cozinha salvar(Cozinha cozinha) {
         return entityManager.merge(cozinha);
     }
 

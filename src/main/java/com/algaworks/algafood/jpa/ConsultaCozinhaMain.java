@@ -18,7 +18,7 @@ public class ConsultaCozinhaMain {
         }
 
         Cozinha cozinha = new Cozinha("Brasileira");
-        bean.adicionar(cozinha);
+        bean.salvar(cozinha);
 
 
         for(Cozinha c: bean.listar()) {
@@ -26,6 +26,15 @@ public class ConsultaCozinhaMain {
         }
 
         System.out.println("Bsucando " + bean.buscar(2L).getNome());
+
+
+        System.out.println("Antes alteração: " + bean.buscar(1L).getNome());
+        cozinha = new Cozinha();
+        cozinha.setId(1L);
+        cozinha.setNome("Teste");
+        bean.salvar(cozinha);
+
+        System.out.println("Depois alteração " + bean.buscar(1L).getNome());
 
     }
 }
