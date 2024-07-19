@@ -25,5 +25,7 @@ public class ConsultaCozinhaMain {
             System.out.println(c.getNome());
         }
 
+        System.out.println("Bsucando " + bean.buscar(2L).getNome());
+
     }
 }
