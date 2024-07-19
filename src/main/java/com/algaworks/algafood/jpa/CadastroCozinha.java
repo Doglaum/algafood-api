@@ -29,4 +29,11 @@ public class CadastroCozinha {
     public Cozinha buscar(Long id) {
         return entityManager.find(Cozinha.class, id);
     }
+
+    @Transactional
+    public void remover(Cozinha cozinha) {
+        // criar uma instancia 'managed' pelo JPA
+        cozinha = buscar(cozinha.getId());
+        entityManager.remove(cozinha);
+    }
 }

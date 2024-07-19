@@ -36,5 +36,7 @@ public class ConsultaCozinhaMain {
 
         System.out.println("Depois alteração " + bean.buscar(1L).getNome());
 
+        bean.remover(cozinha);
+
     }
 }
