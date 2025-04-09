@@ -9,6 +9,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
+
 @Service
 public class CadastroCozinhaService {
 
@@ -29,5 +32,17 @@ public class CadastroCozinhaService {
             throw new EntidadeEmUsoException(
                     String.format("Cozinha de código %d não pode ser removida, pois está em uso", cozinhaId));
         }
+    }
+
+    public Cozinha buscar(final Long cozinhaId) {
+        try {
+            return cozinhaRepository.buscar(cozinhaId);
+        } catch (EntityNotFoundException e) {
+            throw new EntidadeNaoEncontradaException(String.format("Não foi encontrada a cozinha com id %d", cozinhaId));
+        }
+    }
+
+    public List<Cozinha> listar() {
+        return cozinhaRepository.listar();
     }
 }
