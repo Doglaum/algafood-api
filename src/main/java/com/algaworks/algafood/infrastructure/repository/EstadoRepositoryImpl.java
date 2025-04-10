@@ -1,5 +1,6 @@
 package com.algaworks.algafood.infrastructure.repository;
 
+import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.model.Estado;
 import com.algaworks.algafood.domain.repository.EstadoRepository;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class EstadoRepositoryImpl implements EstadoRepository {
@@ -35,9 +37,7 @@ public class EstadoRepositoryImpl implements EstadoRepository {
 
     @Transactional
     @Override
-    public void remover(Estado estado) {
-        // criar uma instancia 'managed' pelo JPA
-        estado = buscar(estado.getId());
-        entityManager.remove(estado);
+    public void remover(Long idEstado) {
+        entityManager.remove(buscar(idEstado));
     }
 }

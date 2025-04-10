@@ -6,4 +6,8 @@ public class EntidadeNaoEncontradaException extends RuntimeException{
         super(mensagem);
     }
 
+    public EntidadeNaoEncontradaException() {
+        super("");
+    }
+
 }
