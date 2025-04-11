@@ -27,41 +27,32 @@ public class CadastroRestauranteService {
 
     public Restaurante salvar(final Restaurante restaurante) {
         final Long cozinhaId = restaurante.getCozinha().getId();
-        Cozinha cozinha = cozinhaRepository.buscar(cozinhaId);
-        if (Objects.isNull(cozinha)) {
-            throw new EntidadeNaoEncontradaException(
-                    String.format("Não existe cadastro de cozinha com código %d", cozinhaId));
-        }
+        Cozinha cozinha = cozinhaRepository.findById(cozinhaId).orElseThrow(
+                () -> new EntidadeNaoEncontradaException(String.format("Não existe cadastro de cozinha com código %d", cozinhaId)));
         restaurante.setCozinha(cozinha);
-        return restauranteRepository.salvar(restaurante);
+        return restauranteRepository.save(restaurante);
     }
 
     public List<Restaurante> listar() {
-        return restauranteRepository.listar();
+        return restauranteRepository.findAll();
     }
 
     public Restaurante buscar(final Long idRestaurante) {
-        Restaurante restaurante = restauranteRepository.buscar(idRestaurante);
-        if (Objects.isNull(restaurante)) {
-            throw new EntidadeNaoEncontradaException(
-                    String.format("Não existe restaurante com id %d", idRestaurante));
-        }
-        return restaurante;
+        return restauranteRepository.findById(idRestaurante).orElseThrow(
+                () -> new EntidadeNaoEncontradaException(String.format("Não existe restaurante com id %d", idRestaurante)));
     }
 
     public Restaurante atualizar(final Long idRestaurante, Restaurante restaurante) {
-        final Restaurante restauranteAtual = restauranteRepository.buscar(idRestaurante);
+        final Restaurante restauranteAtual = buscar(idRestaurante);
         BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
         if (Objects.nonNull(restaurante.getCozinha())) {
-            Cozinha cozinha = restaurante.getCozinha();
-            cozinha = cozinhaRepository.buscar(cozinha.getId());
-            if (Objects.isNull(cozinha)) {
-                throw new EntidadeNaoEncontradaException(
-                        String.format("Não existe cozinha com id %d", cozinha.getId()));
-            }
+            Long cozinhaId = restaurante.getCozinha().getId();
+            Cozinha cozinha = cozinhaRepository.findById(cozinhaId).orElseThrow(
+                    () -> new EntidadeNaoEncontradaException(String.format("Não existe cozinha com id %d", cozinhaId))
+            );
             restauranteAtual.setCozinha(cozinha);
         }
-        return restauranteRepository.salvar(restauranteAtual);
+        return restauranteRepository.save(restauranteAtual);
     }
 
     public Restaurante atualizarParcial(final Long idRestaurante, Map<String, Object> campos) {
