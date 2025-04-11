@@ -31,13 +31,12 @@ public class CadastroEstadoService {
     }
 
     public Estado atualizar(Long idEstado, Estado estado) {
-        try {
-            Estado estadoAtual = estadoRepository.buscar(idEstado);
-            BeanUtils.copyProperties(estado, estadoAtual, "id");
-            return estadoRepository.salvar(estadoAtual);
-        } catch (EntityNotFoundException e) {
+        Estado estadoAtual = estadoRepository.buscar(idEstado);
+        if (Objects.isNull(estadoAtual)) {
             throw new EntidadeNaoEncontradaException(String.format("Estado com id %d não encontrado", idEstado));
         }
+        BeanUtils.copyProperties(estado, estadoAtual, "id");
+        return estadoRepository.salvar(estadoAtual);
     }
 
     public void excluir(Long idEstado) {

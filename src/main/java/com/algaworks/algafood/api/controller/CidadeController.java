@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController(value = "/cidades")
+@RestController
+@RequestMapping(value = "/cidades")
 public class CidadeController {
 
     @Autowired

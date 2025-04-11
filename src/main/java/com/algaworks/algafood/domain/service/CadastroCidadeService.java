@@ -47,13 +47,12 @@ public class CadastroCidadeService {
     }
 
     private Estado getEstado(Cidade cidade) {
-        try {
-            final Long idEstado = cidade.getEstado().getId();
-            final Estado estado = estadoRepository.buscar(idEstado);
-            return estado;
-        } catch (EntityNotFoundException e) {
+        final Long idEstado = cidade.getEstado().getId();
+        final Estado estado = estadoRepository.buscar(idEstado);
+        if (Objects.isNull(estado)) {
             throw new EntidadeNaoEncontradaException(String.format("Estado com id %d não encontrada", cidade.getEstado().getId()));
         }
+        return estado;
     }
 
     public void deletar(Long idCidade) {

@@ -1,5 +1,6 @@
 package com.algaworks.algafood.infrastructure.repository;
 
+import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.model.Cidade;
 import com.algaworks.algafood.domain.repository.CidadeRepository;
 import org.springframework.stereotype.Component;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class CidadeRepositoryImpl implements CidadeRepository {
@@ -36,11 +38,17 @@ public class CidadeRepositoryImpl implements CidadeRepository {
     }
 
     @Override
+    @Transactional
     public Cidade buscar(Long idCidade) {
+        Cidade cidade = entityManager.find(Cidade.class, idCidade);
+        if(Objects.isNull(cidade)) {
+            throw new EntidadeNaoEncontradaException(String.format("Cidade com id %d não encontrada", idCidade));
+        }
         return entityManager.find(Cidade.class, idCidade);
     }
 
     @Override
+    @Transactional
     public void remover(Long idCidade) {
         entityManager.remove(buscar(idCidade));
     }
