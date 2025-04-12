@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -73,5 +74,9 @@ public class CadastroRestauranteService {
                 ReflectionUtils.setField(field, restauranteDestino, novoValor);
             }
         });
+    }
+
+    public List<Restaurante> findByTaxaFrenteBetween(BigDecimal min, BigDecimal max) {
+        return restauranteRepository.findByTaxaFreteBetween(min, max);
     }
 }

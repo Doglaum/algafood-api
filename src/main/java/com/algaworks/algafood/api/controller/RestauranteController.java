@@ -3,7 +3,6 @@ package com.algaworks.algafood.api.controller;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.model.Restaurante;
 import com.algaworks.algafood.domain.service.CadastroRestauranteService;
-import org.apache.coyote.Response;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +43,7 @@ public class RestauranteController {
     }
 
     @PutMapping(value = "/{idRestaurante}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> atualizar(@RequestParam Long idRestaurante, @RequestBody Restaurante restaurante) {
+    public ResponseEntity<?> atualizar(@PathVariable Long idRestaurante, @RequestBody Restaurante restaurante) {
         try {
             Restaurante restauranteAtual = cadastroRestauranteService.buscar(idRestaurante);
             BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
@@ -62,5 +62,11 @@ public class RestauranteController {
         } catch (EntidadeNaoEncontradaException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
+
+    @GetMapping(value = "/por-taxa-frete")
+    public ResponseEntity<List<Restaurante>> restaurantesPorTaxaFrete(@RequestParam(value = "minimo") BigDecimal min, @RequestParam(value = "maximo") BigDecimal max) {
+        List<Restaurante> byTaxaFrete = cadastroRestauranteService.findByTaxaFrenteBetween(min, max);
+        return ResponseEntity.ok(byTaxaFrete);
     }
 }
