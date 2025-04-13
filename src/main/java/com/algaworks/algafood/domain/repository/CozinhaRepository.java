@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface CozinhaRepository extends JpaRepository<Cozinha, Long> {
 
+    boolean existsByNomeIgnoreCase(String nome);
+
 }

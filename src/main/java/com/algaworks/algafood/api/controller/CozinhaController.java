@@ -1,5 +1,6 @@
 package com.algaworks.algafood.api.controller;
 
+import com.algaworks.algafood.domain.exception.CozinhaJaExisteException;
 import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.model.Cozinha;
@@ -26,19 +27,22 @@ public class CozinhaController {
     }
 
     @GetMapping(value = "/{cozinhaId}")
-    public ResponseEntity<Cozinha> buscar(@PathVariable Long cozinhaId) {
-        Cozinha cozinha = cadastroCozinhaService.buscar(cozinhaId);
-        if (cozinha != null) {
-            return ResponseEntity.ok(cozinha);
+    public ResponseEntity<?> buscar(@PathVariable Long cozinhaId) {
+        try {
+            return ResponseEntity.ok(cadastroCozinhaService.buscar(cozinhaId));
+        } catch (EntidadeNaoEncontradaException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-//        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        return ResponseEntity.notFound().build();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cozinha adicionar(@RequestBody Cozinha cozinha) {
-        return cadastroCozinhaService.salvar(cozinha);
+    public ResponseEntity<?> adicionar(@RequestBody Cozinha cozinha) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(cadastroCozinhaService.salvar(cozinha));
+        } catch (CozinhaJaExisteException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     @PutMapping("/{cozinhaId}")

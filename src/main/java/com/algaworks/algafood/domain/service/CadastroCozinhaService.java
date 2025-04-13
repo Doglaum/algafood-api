@@ -2,6 +2,7 @@ package com.algaworks.algafood.domain.service;
 
 import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.algaworks.algafood.domain.exception.CozinhaJaExisteException;
 import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.repository.CozinhaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -19,6 +19,9 @@ public class CadastroCozinhaService {
     private CozinhaRepository cozinhaRepository;
 
     public Cozinha salvar(final Cozinha cozinha) {
+        if(cozinhaRepository.existsByNomeIgnoreCase(cozinha.getNome())) {
+            throw new CozinhaJaExisteException(String.format("Já existe uma cozinha com o nome '%s'.", cozinha.getNome()));
+        }
         return cozinhaRepository.save(cozinha);
     }
 
