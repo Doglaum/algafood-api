@@ -81,6 +81,14 @@ public class CadastroRestauranteService {
     }
 
     public List<Restaurante> findByNomeECozinha(String nome, Long cozinhaId) {
-        return restauranteRepository.consultarPorNomeECozinha(nome, cozinhaId);
+        return restauranteRepository.consultarPorNomeECozinhaOrm(nome, cozinhaId);
     }
+
+    public List<Restaurante> findByNomeAndTaxaFreteInicialAndTaxaFreteFinal(String nome, BigDecimal taxaInicial, BigDecimal taxaFinal) {
+        return restauranteRepository.find(
+                nome,
+                taxaInicial,
+                taxaFinal);
+    }
+
 }

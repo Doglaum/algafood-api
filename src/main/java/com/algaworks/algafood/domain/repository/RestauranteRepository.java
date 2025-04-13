@@ -9,10 +9,10 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
-public interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
+public interface RestauranteRepository extends JpaRepository<Restaurante, Long>, RestauranteRepositoryQueries {
 
     List<Restaurante> findByTaxaFreteBetween(BigDecimal min, BigDecimal max);
 
-    List<Restaurante> consultarPorNomeECozinha(String nome, @Param("id") Long cozinhaId);
+    List<Restaurante> consultarPorNomeECozinhaOrm(String nome, @Param("id") Long cozinhaId);
 
 }

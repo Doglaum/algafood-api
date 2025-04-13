@@ -71,7 +71,16 @@ public class RestauranteController {
     }
 
     @GetMapping(value = "/por-nome-e-cozinha")
-    public ResponseEntity<List<Restaurante>> restaurantesPorNomeECozinha(@RequestParam(value = "nome") String nome, @RequestParam(value = "cozinhaId") Long cozinhaId){
+    public ResponseEntity<List<Restaurante>> restaurantesPorNomeECozinha(@RequestParam(value = "nome") String nome, @RequestParam(value = "cozinhaId") Long cozinhaId) {
         return ResponseEntity.ok(cadastroRestauranteService.findByNomeECozinha(nome, cozinhaId));
     }
+
+    @GetMapping(value = "/por-parametros")
+    public ResponseEntity<List<Restaurante>> findPorParametros(
+            @RequestParam(value = "nome", required = false) String nome,
+            @RequestParam(value = "taxaInicial", required = false) BigDecimal taxaInicial,
+            @RequestParam(value = "taxaFinal", required = false) BigDecimal taxaFinal) {
+        return ResponseEntity.ok(cadastroRestauranteService.findByNomeAndTaxaFreteInicialAndTaxaFreteFinal(nome, taxaInicial, taxaFinal));
+    }
+
 }
