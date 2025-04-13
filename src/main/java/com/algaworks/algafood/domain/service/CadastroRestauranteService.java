@@ -79,4 +79,8 @@ public class CadastroRestauranteService {
     public List<Restaurante> findByTaxaFrenteBetween(BigDecimal min, BigDecimal max) {
         return restauranteRepository.findByTaxaFreteBetween(min, max);
     }
+
+    public List<Restaurante> findByNomeECozinha(String nome, Long cozinhaId) {
+        return restauranteRepository.consultarPorNomeECozinha(nome, cozinhaId);
+    }
 }

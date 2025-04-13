@@ -69,4 +69,9 @@ public class RestauranteController {
         List<Restaurante> byTaxaFrete = cadastroRestauranteService.findByTaxaFrenteBetween(min, max);
         return ResponseEntity.ok(byTaxaFrete);
     }
+
+    @GetMapping(value = "/por-nome-e-cozinha")
+    public ResponseEntity<List<Restaurante>> restaurantesPorNomeECozinha(@RequestParam(value = "nome") String nome, @RequestParam(value = "cozinhaId") Long cozinhaId){
+        return ResponseEntity.ok(cadastroRestauranteService.findByNomeECozinha(nome, cozinhaId));
+    }
 }
