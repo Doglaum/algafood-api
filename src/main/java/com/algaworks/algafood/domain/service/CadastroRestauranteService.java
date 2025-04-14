@@ -8,6 +8,7 @@ import com.algaworks.algafood.domain.repository.RestauranteRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
@@ -76,7 +77,7 @@ public class CadastroRestauranteService {
         });
     }
 
-    public List<Restaurante> findByTaxaFrenteBetween(BigDecimal min, BigDecimal max) {
+    public List<Restaurante> findByTaxaFreteBetween(BigDecimal min, BigDecimal max) {
         return restauranteRepository.findByTaxaFreteBetween(min, max);
     }
 
@@ -91,4 +92,7 @@ public class CadastroRestauranteService {
                 taxaFinal);
     }
 
+    public List<Restaurante> findComFreteGratis(String nome) {
+        return restauranteRepository.findComFreteGratis(nome);
+    }
 }
