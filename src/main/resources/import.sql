@@ -1,9 +1,9 @@
-insert into cozinha (nome) values ('Tailandesa');
-insert into cozinha (nome) values ('Indiana');
-insert into cozinha (nome) values ('Francesa');
-insert into cozinha (nome) values ('Japonesa');
-insert into cozinha (nome) values ('Brasileira');
-insert into cozinha (nome) values ('Mexicana');
+insert into cozinha (id, nome) values (1, 'Tailandesa');
+insert into cozinha (id, nome) values (2, 'Indiana');
+insert into cozinha (id, nome) values (3, 'Francesa');
+insert into cozinha (id, nome) values (4, 'Japonesa');
+insert into cozinha (id, nome) values (5, 'Brasileira');
+insert into cozinha (id, nome) values (6, 'Mexicana');
 
 insert into restaurante (nome, taxa_frete, cozinha_id) values ('Bob Lanches', 0.0, 1);
 insert into restaurante (nome, taxa_frete, cozinha_id) values ('Point do Gordinho', 20.90, 2);
@@ -26,3 +26,6 @@ insert into restaurante (nome, taxa_frete, cozinha_id) values ('La Pasta Mia', 1
 insert into restaurante (nome, taxa_frete, cozinha_id) values ('Barbecue & Beer', 20.00, 5);
 insert into restaurante (nome, taxa_frete, cozinha_id) values ('Fusion Gourmet', 25.90, 2);
 
+insert into forma_pagamento (id, descricao) values (1, 'Cartão de Crédito'), (2, 'Cartão de Débito')
+
+insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id) values (1,1),(1,2),(2,1),(2,2),(3,1),(4,1)
