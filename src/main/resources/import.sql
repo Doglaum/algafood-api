@@ -1,31 +1,38 @@
 insert into cozinha (id, nome) values (1, 'Tailandesa');
 insert into cozinha (id, nome) values (2, 'Indiana');
 insert into cozinha (id, nome) values (3, 'Francesa');
-insert into cozinha (id, nome) values (4, 'Japonesa');
-insert into cozinha (id, nome) values (5, 'Brasileira');
-insert into cozinha (id, nome) values (6, 'Mexicana');
 
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Bob Lanches', 0.0, 1);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Point do Gordinho', 20.90, 2);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Divinissimo', 0.0 1);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Bistro', 16, 2);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Chez Gourmet', 25.00, 3);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Sushi Master', 12.50, 4);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Sabores do Brasil', 8.00, 5);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('El Mariachi', 18.75, 6);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Le Bistro', 20.00, 3);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Sakura Sushi', 10.00, 4);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Pizza da Vila', 0.0, 5);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Cantina Italiana', 15.75, 1);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Hamburgueria Prime', 12.00, 2);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Taco Mania', 14.50, 6);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Grelhados do Chef', 18.00, 5);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Delícias do Oriente', 11.90, 4);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Sabores Europeus', 22.50, 3);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('La Pasta Mia', 16.80, 1);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Barbecue & Beer', 20.00, 5);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Fusion Gourmet', 25.90, 2);
+insert into estado (id, nome) values (1, 'Santa Catarina');
+insert into estado (id, nome) values (2, 'Paraná');
+
+insert into cidade (id, nome, estado_id) values (1, 'Palhoça', 1);
+insert into cidade (id, nome, estado_id) values (2, 'Curitiba', 2);
+
+insert into restaurante (nome, taxa_frete, cozinha_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_bairro, endereco_cidade_id, data_cadastro, data_atualizacao) values ('Bob Lanches', 0.0, 1, "88134-400", "Rua das Flores", "200", "Bela Vista", 1, utc_timestamp, utc_timestamp);
+insert into restaurante (nome, taxa_frete, cozinha_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_bairro, endereco_cidade_id, data_cadastro, data_atualizacao) values ('Point do Gordinho', 20.90, 2, "88134-410", "Rua das Ameixas", "147", "Passa Vinte", 1, utc_timestamp, utc_timestamp);
+insert into restaurante (nome, taxa_frete, cozinha_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_bairro, endereco_cidade_id, data_cadastro, data_atualizacao) values ('Divinissimo', 0.0, 1, "88134-420", "Rua das Laranjas", "987-77", "Guarda", 1, utc_timestamp, utc_timestamp);
+insert into restaurante (nome, taxa_frete, cozinha_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_bairro, endereco_cidade_id, data_cadastro, data_atualizacao) values ('Bistro', 16, 2, "80010-360", "Rua das Vigas", "1344", "Formosa", 2, utc_timestamp, utc_timestamp);
+insert into restaurante (nome, taxa_frete, cozinha_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_bairro, endereco_cidade_id, data_cadastro, data_atualizacao) values ('Chez Gourmet', 25.00, 3, "80010-110", "Rua da Esperança", "12", "Caixa Alta", 2, utc_timestamp, utc_timestamp);
+insert into restaurante (nome, taxa_frete, cozinha_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_bairro, endereco_cidade_id, data_cadastro, data_atualizacao) values ('Sushi Master', 12.50, 3, "80010-350", "Rua sem nome", "1", "Ponta de Baixo", 2, utc_timestamp, utc_timestamp);
 
 insert into forma_pagamento (id, descricao) values (1, 'Cartão de Crédito'), (2, 'Cartão de Débito')
 
 insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id) values (1,1),(1,2),(2,1),(2,2),(3,1),(4,1)
+
+insert into produto (nome, descricao, preco, ativo, restaurante_id) values ("Hambúrguer Clássico", "Pão, carne e queijo", 25.00, true, 1);
+insert into produto (nome, descricao, preco, ativo, restaurante_id) values ("Batata Frita", "Batata crocante", 12.00, true, 1);
+
+insert into produto (nome, descricao, preco, ativo, restaurante_id) values ("X-Tudo", "Sanduíche completo", 28.00, true, 2);
+insert into produto (nome, descricao, preco, ativo, restaurante_id) values ("Refrigerante", "Copo 300ml", 6.00, true, 2);
+
+insert into produto (nome, descricao, preco, ativo, restaurante_id) values ("Pizza Calabresa", "Calabresa e queijo", 39.90, true, 3);
+insert into produto (nome, descricao, preco, ativo, restaurante_id) values ("Pizza Portuguesa", "Presunto, ovo e ervilha", 42.00, true, 3);
+
+insert into produto (nome, descricao, preco, ativo, restaurante_id) values ("Risoto de Camarão", "Arroz cremoso com camarão", 55.00, true, 4);
+insert into produto (nome, descricao, preco, ativo, restaurante_id) values ("Salada Caesar", "Alface, frango e molho caesar", 22.00, true, 4);
+
+insert into produto (nome, descricao, preco, ativo, restaurante_id) values ("Salmão Grelhado", "Salmão com legumes", 60.00, true, 5);
+insert into produto (nome, descricao, preco, ativo, restaurante_id) values ("Sopa de Cebola", "Sopa tradicional francesa", 18.00, true, 5);
+
+insert into produto (nome, descricao, preco, ativo, restaurante_id) values ("Sushi Especial", "Combo de sushis variados", 48.00, true, 6);
+insert into produto (nome, descricao, preco, ativo, restaurante_id) values ("Temaki de Salmão", "Temaki recheado de salmão", 22.00, true, 6);
